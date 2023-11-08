@@ -272,6 +272,12 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+-- Set tab width
+vim.o.tabstop = 4
+vim.o.softtabstop = 0
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -476,7 +482,12 @@ require('mason-lspconfig').setup()
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
-  -- gopls = {},
+  gopls = {
+    completeUnimported = true,
+    analyses = {
+      unusedparams = true,
+    }
+  },
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
