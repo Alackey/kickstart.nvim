@@ -124,8 +124,13 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
       on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk,
+        local gitsigns = require('gitsigns')
+
+        vim.keymap.set('n', '<leader>hp', gitsigns.preview_hunk,
           { buffer = bufnr, desc = 'Preview git hunk' })
+
+        vim.keymap.set('n', '<leader>gb', function() gitsigns.blame_line { full = true } end,
+          { desc = 'Run git blame on current line' })
 
         -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns
