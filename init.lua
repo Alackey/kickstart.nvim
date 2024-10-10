@@ -160,9 +160,6 @@ require('lazy').setup({
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
   },
 
   {
@@ -290,6 +287,11 @@ vim.o.softtabstop = 0
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
+-- Turn spell check on
+vim.o.spell = true
+
+vim.cmd.colorscheme 'onedark'
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -316,6 +318,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
+    layout_strategy = 'vertical',
+    layout_config = { preview_height = 0.7 },
     mappings = {
       i = {
         ['<C-u>'] = false,
@@ -449,7 +453,7 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-  nmap('gr', function() require('telescope.builtin').lsp_references({ fname_width = 60 }) end, '[G]oto [R]eferences')
+  nmap('gr', function() require('telescope.builtin').lsp_references({ fname_width = 90 }) end, '[G]oto [R]eferences')
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
   nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
