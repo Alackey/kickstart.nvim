@@ -6,6 +6,7 @@ return {
 		"antoinemadec/FixCursorHold.nvim",
 		"nvim-treesitter/nvim-treesitter",
 		"nvim-neotest/neotest-go",
+		"fredrikaverpil/neotest-golang",
 	},
 	config = function()
 		-- get neotest namespace (api call creates or returns namespace)
@@ -35,12 +36,15 @@ return {
 		neotest.setup({
 			-- your neotest config here
 			adapters = {
-				require("neotest-go")({
-					experimental = {
-						test_table = true,
-					},
-					args = { "-count=1", "-timeout=60s" }
+				require("neotest-golang")({
+					go_test_args = { "-count=1", "-timeout=60s" }
 				}),
+				-- require("neotest-go")({
+				-- 	experimental = {
+				-- 		test_table = true,
+				-- 	},
+				-- 	args = { "-count=1", "-timeout=60s" }
+				-- }),
 			},
 		})
 	end,
